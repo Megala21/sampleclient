@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="APIM Sample Gadget" description="APIM Sample Gadget">
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html">
+        <![CDATA[
+            <head>
+                <!--Custom Style-->
+                <link rel="stylesheet" type="text/css" href="css/gadget.css" />
+
+                <!--JQuery--->
+                <script src="js/jquery-1.10.2.js"></script>
+
+                <!--Include VizGrammar-->
+                <script src="js/d3.min.js"></script>
+                <script src="js/vega.js"></script>
+                <script src="js/VizGrammar.min.js"></script>
+
+                <!---Custom js--->
+                <script src="js/gadgetconf.js"></script>
+                <script src="js/main.js"></script>
+            </head>
+            <body>
+              <div id="chart-canvas"></div>
+            </body>
+        ]]>
+    </Content>
+</Module>

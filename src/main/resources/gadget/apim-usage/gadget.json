@@ -1,0 +1,13 @@
+{
+    "id": "apim-usage",
+    "title": "Overall API Usage",
+    "type": "gadget",
+    "thumbnail": "gadget/usa-map/index.png",
+    "settings": {
+        "personalize": true
+    },
+    "data": {
+        "url": "gadget/apim-usage/index.xml"
+    },
+    "description": "Visualizes the APIM statistics"
+}

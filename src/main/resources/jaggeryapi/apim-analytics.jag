@@ -1,0 +1,42 @@
+<%
+(function () {
+    var gson = com.google.gson.Gson();
+    var APIUsageStatisticsRdbmsClientImpl = Packages.sample.client.RDBMSClient;
+    var statRdbmsClient = new APIUsageStatisticsRdbmsClientImpl();
+    var CONTENT_TYPE_JSON = "application/json";
+    var timeFrom = request.getParameter("timeFrom");
+    var timeTo = request.getParameter("timeTo");
+    var apiUsageComparisonMap = {};
+    var dataPointsArray = [];
+    var usage;
+    response.contentType = CONTENT_TYPE_JSON;
+
+    usage = statRdbmsClient.getProviderAPIUsage(timeFrom, timeTo, 6);
+    usage = JSON.parse(gson.toJson(usage));
+    for (var i = 0; i < usage.length; i++) {
+        var obj = usage[i];
+        var key = obj["apiName"] + "-" + obj["provider"];
+        if (apiUsageComparisonMap[key]) {
+            apiUsageComparisonMap[key]["requestCount"] += obj["count"];
+        } else {
+            apiUsageComparisonMap[key] = {
+                "apiName": obj["apiName"],
+                "version": obj["version"],
+                "provider": obj["provider"],
+                "requestCount": obj["count"]
+            }
+        }
+    }
+    for (var key in apiUsageComparisonMap) {
+        dataPointsArray.push({
+            "Api": apiUsageComparisonMap[key]["apiName"],
+            "Request_Count": apiUsageComparisonMap[key]["requestCount"]
+        });
+    }
+    var finalResult = {
+        status: "success",
+        message: dataPointsArray
+    };
+    print(finalResult);
+}());
+%>
